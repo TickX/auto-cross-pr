@@ -1,0 +1,56 @@
+name: 'Auto Cross Pull Requester'
+description: 'Creates a PR to the target repo with the changes to the specified file or directory'
+inputs:
+  token:
+    description: 'GitHub access token'
+    required: true
+  item:
+    description: 'The file or directory to commit'
+    required: true
+  repo:
+    description: 'The target repository'
+    required: true
+  repo_owner:
+    description: 'The target repository owner'
+    required: true
+  repo_base_branch:
+    description: 'A new branch will be created from this one before submitting the PR'
+    required: false
+  repo_target_dir:
+    description: 'The chosen item will be committed to this directory'
+    required: false
+  repo_target_branch:
+    description: 'The branch that will be created - Any changes will be committed here'
+    required: false
+  commit_author:
+    description: 'The author of the commit'
+    required: false
+  commit_email:
+    description: 'The email associated with the commit'
+    required: false
+  commit_message:
+    description: 'The commit message'
+    required: false
+  pr_title:
+    description: 'The title of the PR'
+    required: false
+runs:
+  using: "composite"
+  steps:
+    - run: $GITHUB_ACTION_PATH/auto-cross-pr.sh
+      shell: bash
+      env:
+        GH_TOKEN: ${{ inputs.token }}
+        ITEM: ${{ inputs.item }}
+        REPO: ${{ inputs.repo }}
+        REPO_OWNER: ${{ inputs.repo_owner }}
+        REPO_BASE_BRANCH: ${{ inputs.repo_base_branch }}
+        REPO_TARGET_DIR: ${{ inputs.repo_target_dir }}
+        REPO_TARGET_BRANCH: ${{ inputs.repo_target_branch }}
+        COMMIT_AUTHOR: ${{ inputs.commit_author }}
+        COMMIT_EMAIL: ${{ inputs.commit_email }}
+        COMMIT_MESSAGE: ${{ inputs.commit_message }}
+        PR_TITLE: ${{ inputs.pr_title }}
+branding:
+  icon: 'corner-right-up'
+  color: 'yellow'
