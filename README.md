@@ -11,7 +11,7 @@ in one repo (eg. API service), and commit them to another (eg. web app).
 ```yaml
 - uses: actions/checkout@v2
 - name: Create PR to my-org/target-repo
-  uses: tickx/auto-cross-pr@v0.1.0
+  uses: TickX/auto-cross-pr@v0.1.0
   with:
     token: ${{ secrets.GH_TOKEN }}
     item: path/to/file.ext
