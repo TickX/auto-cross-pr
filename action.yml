@@ -34,6 +34,9 @@ inputs:
   pr_title:
     description: 'The title of the PR'
     required: false
+  pr_body:
+    description: 'The PR body content'
+    required: false
 runs:
   using: "composite"
   steps:
@@ -51,6 +54,7 @@ runs:
         COMMIT_EMAIL: ${{ inputs.commit_email }}
         COMMIT_MESSAGE: ${{ inputs.commit_message }}
         PR_TITLE: ${{ inputs.pr_title }}
+        PR_BODY: ${{ inputs.pr_body }}
 branding:
   icon: 'corner-right-up'
   color: 'yellow'

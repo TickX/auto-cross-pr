@@ -14,7 +14,7 @@ you have a look at the [Alternative Options](#alternative-options) section just 
 ```yaml
 - uses: actions/checkout@v2
 - name: Create PR to my-org/target-repo
-  uses: TickX/auto-cross-pr@v0.1.0
+  uses: TickX/auto-cross-pr@v0.1.1
   with:
     token: ${{ secrets.GH_TOKEN }}
     item: path/to/file.ext
@@ -38,6 +38,7 @@ Here's the full list of inputs:
 | `commit_email`     | The email associated with the commit                                | noreply@github.com                |
 | `commit_message`   | The commit message                                                  | "Auto update"                     |
 | `pr_title`         | The PR title                                                        | "Auto Update"                     |
+| `pr_body`          | The PR body content                                                 | "This is an automatic update."    |
 
 ### GitHub Access Token
 
