@@ -60,6 +60,7 @@ echo "Pushing changes"
 git push origin "${REPO_TARGET_BRANCH}" || error "could not push changes"
 
 echo "Creating Pull Request"
+# See https://docs.github.com/en/rest/reference/pulls#create-a-pull-request
 read -r -d '' body <<EOF
 {
     "head": "${REPO_TARGET_BRANCH}",
