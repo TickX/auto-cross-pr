@@ -6,6 +6,9 @@ repository, on the specified branch and directory.
 A use case for this is to generate some files (eg. TypeScript definitions) during a build
 in one repo (eg. API service), and commit them to another (eg. web app).
 
+**Note:** While this action can be quite useful, it may not always be the best solution for you. I recommend
+you have a look at the [Alternative Options](#alternative-options) section just in case.
+
 ## Usage
 
 ```yaml
@@ -56,3 +59,12 @@ use a GitHub App for the sole purpose of creating a token:
 4. In your workflow, obtain a token by using [tibdex/github-app-token](https://github.com/tibdex/github-app-token),
 which takes your app's ID and private key and generates a temporary auth token.
 5. Pass the generated token to this action's `token` input.
+
+## Alternative Options
+
+Depending on your case, you may want to look at alternative options that can achieve similar results.
+
+Some of these options are:
+- [Git Submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules) (here's a [GitHub article](https://github.blog/2016-02-01-working-with-submodules/) about this)
+- GitHub [`repository_dispatch`](https://docs.github.com/en/actions/reference/events-that-trigger-workflows#repository_dispatch) event (here's another great [action by peter-evans](https://github.com/peter-evans/repository-dispatch))
+- [GitHub packages](https://docs.github.com/en/packages/publishing-and-managing-packages/about-github-packages)
