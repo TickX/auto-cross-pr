@@ -22,6 +22,7 @@ echo "Initialising"
 : "${COMMIT_EMAIL="noreply@github.com"}"
 : "${COMMIT_MESSAGE="Auto update"}"
 : "${PR_TITLE:="Auto Update"}"
+: "${PR_BODY:="This is an automatic update."}"
 
 git config --global user.email "${COMMIT_EMAIL}"
 git config --global user.name "${COMMIT_AUTHOR}"
@@ -61,9 +62,10 @@ git push origin "${REPO_TARGET_BRANCH}" || error "could not push changes"
 echo "Creating Pull Request"
 read -r -d '' body <<EOF
 {
-    "title": "${PR_TITLE}",
     "head": "${REPO_TARGET_BRANCH}",
-    "base": "${REPO_BASE_BRANCH}"
+    "base": "${REPO_BASE_BRANCH}",
+    "title": "${PR_TITLE}",
+    "body": "${PR_BODY}"
 }
 EOF
 
