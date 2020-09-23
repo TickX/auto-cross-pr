@@ -6,7 +6,7 @@ repository, on the specified branch and directory.
 A use case for this is to generate some files (eg. TypeScript definitions) during a build
 in one repo (eg. API service), and commit them to another (eg. web app).
 
-**Note:** While this action can be quite useful, it may not always be the best solution for you. I recommend
+**Note:** Although this action can be quite useful, it likely will not always be the best approach. I recommend
 you have a look at the [Alternative Options](#alternative-options) section just in case.
 
 ## Usage
@@ -63,7 +63,7 @@ which takes your app's ID and private key and generates a temporary auth token.
 
 ## Alternative Options
 
-Depending on your case, you may want to look at alternative options that can achieve similar results.
+Depending on your case, you may want to look at alternative options that can achieve similar results, and potentially be better.
 
 Some of these options are:
 - [Git Submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules) (here's a [GitHub article](https://github.blog/2016-02-01-working-with-submodules/) about this)
