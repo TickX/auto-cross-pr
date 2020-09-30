@@ -21,20 +21,21 @@ echo "Initialising"
 : "${COMMIT_AUTHOR="Auto Cross Pull Requester"}"
 : "${COMMIT_EMAIL="noreply@github.com"}"
 : "${COMMIT_MESSAGE="Auto update"}"
-: "${PR_TITLE:="Auto Update"}"
-: "${PR_BODY:="This is an automatic update."}"
+: "${PR_TITLE="Auto Update"}"
+: "${PR_BODY="This is an automatic update."}"
 
 git config --global user.email "${COMMIT_EMAIL}"
 git config --global user.name "${COMMIT_AUTHOR}"
 
-echo "Cloning destination repository"
 CLONE_DIR=$(mktemp -d)
 [ ${?} == 0 ] || error "could not create temporary directory"
+NEW_ITEM="${REPO_TARGET_DIR}/$(basename "${ITEM}")"
 
+echo "Cloning destination repository"
 git clone \
   "https://x-access-token:${GH_TOKEN}@github.com/${REPO_OWNER}/${REPO}.git" \
-  "${CLONE_DIR}" || error "could not clone repository"
-cp -r "${ITEM}" "${CLONE_DIR}/${REPO_TARGET_DIR}" || error "could not copy item into cloned directory"
+  "${CLONE_DIR:?}" || error "could not clone repository"
+cp -r "${ITEM}" "${CLONE_DIR}/${NEW_ITEM}" || error "could not copy item into cloned directory"
 cd "${CLONE_DIR}" || error "could not cd into cloned directory"
 
 echo "Switching to branch '${REPO_TARGET_BRANCH}'"
@@ -48,7 +49,7 @@ else
   git stash || error "could not stash changes"
   git checkout "${REPO_TARGET_BRANCH}" || error "could not checkout the target branch"
   # Always prioritise and overwrite incoming updates to avoid merge conflicts.
-  git checkout stash -- "${REPO_TARGET_DIR}/${ITEM}" || error "could not apply stashed changes"
+  git checkout stash -- "${NEW_ITEM}" || error "could not apply stashed changes"
 fi
 
 echo "Checking diff"
