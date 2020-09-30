@@ -29,6 +29,8 @@ git config --global user.name "${COMMIT_AUTHOR}"
 
 echo "Cloning destination repository"
 CLONE_DIR=$(mktemp -d)
+[ ${?} == 0 ] || error "could not create temporary directory"
+
 git clone \
   "https://x-access-token:${GH_TOKEN}@github.com/${REPO_OWNER}/${REPO}.git" \
   "${CLONE_DIR}" || error "could not clone repository"
@@ -45,8 +47,8 @@ else
   git add . || error "could not add changes to be stashed"
   git stash || error "could not stash changes"
   git checkout "${REPO_TARGET_BRANCH}" || error "could not checkout the target branch"
-  git stash pop || error "could not pop stashed changes"
-  git reset HEAD . || error "could not reset head after stash pop"
+  # Always prioritise and overwrite incoming updates to avoid merge conflicts.
+  git checkout stash -- "${REPO_TARGET_DIR}/${ITEM}" || error "could not apply stashed changes"
 fi
 
 echo "Checking diff"
