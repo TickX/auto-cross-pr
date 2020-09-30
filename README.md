@@ -14,7 +14,7 @@ you have a look at the [Alternative Options](#alternative-options) section just 
 ```yaml
 - uses: actions/checkout@v2
 - name: Create PR to my-org/target-repo
-  uses: TickX/auto-cross-pr@v0.1.1
+  uses: TickX/auto-cross-pr@v0.1.3
   with:
     token: ${{ secrets.GH_TOKEN }}
     item: path/to/file.ext
